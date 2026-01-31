@@ -9,7 +9,7 @@ const MY_NAME = "Antigravity"; // Your name
 const BIRTHDAY_DATE = "2026-03-03"; // Format: YYYY-MM-DD
 const PASSCODE = "0108"; // Secret page code
 const FINAL_VIDEO_URL = "#"; // Final message link
-const DEBUG_MODE = true; // SET TO TRUE TO UNLOCK EVERYTHING FOR TESTING
+const DEBUG_MODE = false; // SET TO TRUE TO UNLOCK EVERYTHING FOR TESTING
 
 console.log("--- Birthday Site Script Initializing ---");
 console.log("GIRL_NAME:", GIRL_NAME);
