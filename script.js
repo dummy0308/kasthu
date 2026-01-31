@@ -9,7 +9,7 @@ const MY_NAME = "Antigravity"; // Your name
 const BIRTHDAY_DATE = "2026-03-03"; // Format: YYYY-MM-DD
 const PASSCODE = "0108"; // Secret page code
 const FINAL_VIDEO_URL = "#"; // Final message link
-const DEBUG_MODE = false; // SET TO TRUE TO UNLOCK EVERYTHING FOR TESTING
+const DEBUG_MODE = true; // SET TO TRUE TO UNLOCK EVERYTHING FOR TESTING
 
 console.log("--- Birthday Site Script Initializing ---");
 console.log("GIRL_NAME:", GIRL_NAME);
@@ -89,57 +89,25 @@ const LETTERS = [
 
 const SURPRISES = [
     {
-        day: 30, type: "text", title: "The Day is Coming!", message: `The countdown starts now! 30 days of surprises just for you.<br>Innum 30 naal irukku,
-Aanaal indha naal enakku special…
-Un sirippu nenachale
-Indha naalum festival pola feel aagudhu.
+        day: 30, type: "text", title: "The Beginning", message: `Innum 30 naal irukku... This countdown is just a small way to say how much you mean to me. Get ready for a surprise every 5 days!
+        Innum 30 naal irukku, Aanaal indha naal enakku special… Un sirippu nenachale Indha naalum festival pola feel aagudhu.
 
-Birthday oru naal thaan varum,
-Aanaal nee irukkura ella naalum
-En life-la celebration thaan.
+Birthday oru naal thaan varum, Aanaal nee irukkura ella naalum En life-la celebration thaan.
 
-Cake illa, candle illa,
-Aanaal un ninaivu mattum podhum
-Indha 30 naalum happy-aa irukka.
+Cake illa, candle illa, Aanaal un ninaivu mattum podhum Indha 30 naalum happy-aa irukka.
 
-Un birthday vara varaikkum illa…
-Un sirippu irukkura varaikkum
-En manasula sandhosham mudiyadhu.
+Un birthday vara varaikkum illa… Un sirippu irukkura varaikkum En manasula sandhosham mudiyadhu.
 
-Advance-aa solren illa…
-Late-aa kooda illa…
-Simply heart-la irundhu solren —
-Nee irukkura naal ellame
-Enakku best days thaan 💖` },
-    { day: 29, type: "quiz", title: "Date Night Trivia", message: "What was our very first meal together?", quiz: { question: "Was it...", options: ["Pizza", "Burgers", "Sushi"], correct: 0 } },
-    { day: 28, type: "image", title: "My Favorite View", message: "This always makes me smile.", placeholder: "Image: A photo of your first date spot" },
-    { day: 27, type: "clue", title: "A Real Life Clue", message: "Look inside your favorite handbag... I might have left something small there." },
-    { day: 26, type: "audio", title: "Voice Message", message: "Click the play button when it's ready!", placeholder: "Audio: A sweet morning voice note" },
-    { day: 25, type: "letter", title: "Old School Letter", message: "I wrote this late at night thinking about how much I love your smile..." },
-    { day: 24, type: "quiz", title: "Movie Buff", message: "Which movie did we watch where you fell asleep halfway through?", quiz: { question: "The movie was:", options: ["The Notebook", "Inception", "About Time"], correct: 1 } },
-    { day: 23, type: "image", title: "Throwback", message: "Remember this day?", placeholder: "Image: A goofy selfie from months ago" },
-    { day: 22, type: "text", title: "A Little Encouragement", message: "You're doing amazing today. Just wanted you to know." },
-    { day: 21, type: "clue", title: "Hidden Sweet", message: "Check the kitchen cupboard where you keep the chocolate. Surprise!" },
-    { day: 20, type: "text", title: "Double Digits!", message: "Only 20 days left! Time is flying by." },
-    { day: 19, type: "audio", title: "Our Song", message: "This song always reminds me of that night in the rain.", placeholder: "Audio: Your Favorite Song" },
-    { day: 18, type: "letter", title: "A Promise", message: "I promise to always be the person who holds your hand through everything." },
-    { day: 17, type: "quiz", title: "Travel Trivia", message: "Where did we say we'd go for our dream vacation?", quiz: { question: "Our dream trip is:", options: ["Japan", "Iceland", "Maldives"], correct: 1 } },
-    { day: 16, type: "image", title: "Candid", message: "I took this when you weren't looking because you looked so beautiful.", placeholder: "Image: A candid shot" },
-    { day: 15, type: "text", title: "Halfway There!", message: "15 days down, 15 to go. Ready for the final stretch?" },
-    { day: 14, type: "clue", title: "The Pillow Clue", message: "Check under your pillow tonight... maybe a little note is hiding there." },
-    { day: 13, type: "quiz", title: "Nicknames", message: "What's the one nickname I have for you that you secretly like?", quiz: { question: "Choose one:", options: ["Bubs", "Honey", "Princess"], correct: 0 } },
-    { day: 12, type: "letter", title: "Growing Together", message: "I love how we've grown as a couple this year. Thank you for being mine." },
-    { day: 11, type: "audio", title: "Relaxation", message: "Listen to this when you're stressed today.", placeholder: "Audio: Calming message" },
-    { day: 10, type: "text", title: "Final 10 Days!", message: "The last ten days are going to be the most special ones. Get ready!" },
-    { day: 9, type: "image", title: "A Vision", message: "This is a photo of where I want us to be ten years from now.", placeholder: "Image: Future home/travel goal" },
-    { day: 8, type: "quiz", title: "Inside Joke", message: "What's the one word we use that makes us both burst into laughter?", quiz: { question: "The magic word is:", options: ["Pineapple", "Cactus", "Zucchini"], correct: 2 } },
-    { day: 7, type: "text", title: "One Week!", message: "Only 7 more sleeps until your birthday." },
-    { day: 6, type: "clue", title: "Car Surprise", message: "Check the glovebox in the car... something is waiting." },
-    { day: 5, type: "audio", title: "Night Vibe", message: "A little goodnight message to make you smile.", placeholder: "Audio: Goodnight voice note" },
-    { day: 4, type: "letter", title: "My Hero", message: "You are my hero in so many ways. I admire you more than words can say." },
-    { day: 3, type: "image", title: "Almost Ready", message: "I'm so excited for tomorrow and the day after!", placeholder: "Image: A teaser photo of a gift" },
-    { day: 2, type: "quiz", title: "Preparation", message: "What do you want to do first on your birthday?", quiz: { question: "Your choice:", options: ["Stay in Bed", "Go out for breakfast", "A long drive"], correct: 2 } },
-    { day: 1, type: "text", title: "The Eve", message: "Tonight is the last night of the countdown. Get some sleep, birthday girl!" }
+Advance-aa solren illa… Late-aa kooda illa… Simply heart-la irundhu solren — Nee irukkura naal ellame Enakku best days thaan 💖` },
+    { day: 25, type: "image", title: "Throwback", message: "Remember these? Truly some of my favorites.", images: ["us/imp1.jpg", "us/imp2.jpg", "us/imp3.jpg"] },
+    { day: 20, type: "quiz", title: "Fun Fact", message: "A silly question for you...", quiz: { question: "When will our fights be over?", options: ["Never", "Tomorrow", "After Marriage"], correct: 0 } },
+    { day: 15, type: "audio", title: "Voice Note", message: "A little message from me to you.", placeholder: "voice.m4a" },
+    { day: 10, type: "coupon", title: "Choose Your Treat", message: "Redeem this for one of the following:", options: ["Movie Date 🎬", "Relaxing Massage 💆‍♀️", "Weekend Trip 🚗", "Favorite Food 🍕"] },
+    { day: 5, type: "link", title: "Mood Song", message: "Listen to this...", link: "https://www.youtube.com/watch?v=juHpoMK3AuQ" },
+    { day: 4, type: "text", title: "Why I Love You", message: "I love you because you make ordinary days feel extraordinary. Your smile is my daily motivation." },
+    { day: 3, type: "clue", title: "A Little Hint", message: "Your birthday gift is something you can hold, something you can keep, and something that reminds you of us." },
+    { day: 2, type: "image", title: "Favorite Memory", message: "I smile every time I look at this.", placeholder: "us/imp1.jpg" }, // Defaulting to imp1, user can change later
+    { day: 1, type: "video", title: "Happy Birthday Eve!", message: "Almost there! One last wish before the big day.", placeholder: "video.mp4" } // Placeholder for now
 ];
 
 // --- LOGIC ---
@@ -180,6 +148,7 @@ function startTimers() {
         const diff = target - now;
         const daysLeft = Math.ceil(diff / 86400000);
 
+        // ... existing timer logic ...
         if (diff > 0) {
             const d = Math.floor(diff / 86400000);
             const h = Math.floor((diff % 86400000) / 3600000);
@@ -200,15 +169,13 @@ function startTimers() {
             if (countdownEl) countdownEl.classList.add('hidden');
         }
 
-        // Logic for unlocking sections
         if (DEBUG_MODE) {
             if (lockBanner) lockBanner.classList.add('hidden');
             if (bdaySection) bdaySection.classList.remove('hidden');
-            // Don't start confetti in loop, just once
         } else {
             if (daysLeft > 30) {
                 if (lockBanner) {
-                    lockBanner.textContent = "The daily surprises will start appearing when we're 30 days away! ❤️";
+                    lockBanner.textContent = "The surprise journey starts when we are 30 days away! ❤️";
                     lockBanner.classList.remove('hidden');
                 }
             } else if (daysLeft <= 0) {
@@ -239,15 +206,15 @@ function renderSurprises() {
         const card = document.createElement('div');
         card.className = 'card';
 
-        let isLocked = (daysLeft > data.day && daysLeft <= 30) || (daysLeft > 30);
+        let isLocked = daysLeft > data.day;
         if (DEBUG_MODE || daysLeft <= 0) isLocked = false;
 
         if (isLocked) {
             card.classList.add('locked');
-            card.innerHTML = `<span class="card-number">🔒</span><p>Day ${data.day}</p>`;
+            card.innerHTML = `<span class="card-number">🔒</span><p>${data.day} Days Left</p>`;
         } else {
             if (openedSurprises.includes(data.day)) card.classList.add('opened');
-            card.innerHTML = `<span class="card-number">${data.day}</span><p>Surprise!</p>`;
+            card.innerHTML = `<span class="card-number">${data.day}</span><p>${data.type.toUpperCase()}</p>`;
             card.onclick = () => openSurprise(data);
         }
         grid.appendChild(card);
@@ -261,14 +228,49 @@ function openSurprise(data) {
 
     let content = `<p style="font-size:1.1rem; margin-bottom:1.5rem;">${data.message}</p>`;
 
-    if (data.type === 'quiz') {
+    if (data.type === 'image') {
+        if (data.images && Array.isArray(data.images)) {
+            content += `<div class="surprise-image-grid">`;
+            data.images.forEach(img => {
+                content += `<img src="${img}" style="width:100%; border-radius:10px; cursor:pointer;" onclick="openLightbox('${img}', '${data.title}')">`;
+            });
+            content += `</div>`;
+        } else {
+            content += `<img src="${data.placeholder}" style="width:100%; border-radius:10px; margin-top:10px; cursor:pointer;" onclick="openLightbox('${data.placeholder}', '${data.title}')">`;
+        }
+    } else if (data.type === 'audio') {
+        content += `<audio controls style="width:100%; margin-top:10px;"><source src="${data.placeholder}" type="audio/mpeg">Your browser does not support the audio element.</audio>`;
+    } else if (data.type === 'video') {
+        content += `<video controls style="width:100%; border-radius:10px; margin-top:10px;"><source src="${data.placeholder}" type="video/mp4">Your browser does not support video.</video>`;
+    } else if (data.type === 'link') {
+        let url = data.link;
+        // Simple YouTube Embed
+        if (url.includes('youtube.com') || url.includes('youtu.be')) {
+            let videoId = url.split('v=')[1];
+            if (!videoId && url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1];
+            const ampersandPosition = videoId ? videoId.indexOf('&') : -1;
+            if (ampersandPosition !== -1) videoId = videoId.substring(0, ampersandPosition);
+
+            if (videoId) {
+                content += `<iframe width="100%" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            } else {
+                content += `<a href="${url}" target="_blank" class="action-btn">Open Link 🔗</a>`;
+            }
+        } else {
+            content += `<a href="${url}" target="_blank" class="action-btn">Open Link 🔗</a>`;
+        }
+    } else if (data.type === 'coupon') {
+        content += `<div class="coupon-container">`;
+        data.options.forEach(opt => {
+            content += `<div class="coupon-ticket">${opt}</div>`;
+        });
+        content += `</div>`;
+    } else if (data.type === 'quiz') {
         content += `<div class="quiz-options"><p><strong>${data.quiz.question}</strong></p>`;
         data.quiz.options.forEach((opt, i) => {
             content += `<button class="quiz-btn" onclick="checkQuiz(this, ${i === data.quiz.correct})">${opt}</button>`;
         });
         content += `</div>`;
-    } else if (data.placeholder) {
-        content += `<div style="background:#f3f4f6; padding:2rem; border-radius:12px; text-align:center; border:2px dashed #d1d5db; color:#6b7280;">${data.placeholder}</div>`;
     }
 
     body.innerHTML = content;
@@ -453,6 +455,30 @@ function setupNavigation() {
             if (link.getAttribute('href').includes(current)) link.classList.add('active');
         });
     };
+
+    // Mobile Menu Toggle Logic
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinksContainer = document.getElementById('nav-links');
+
+    if (menuToggle && navLinksContainer) {
+        menuToggle.onclick = () => {
+            menuToggle.classList.toggle('active');
+            navLinksContainer.classList.toggle('active');
+        };
+
+        // Close menu when a link is clicked
+        navLinksContainer.querySelectorAll('a').forEach(link => {
+            link.onclick = (e) => {
+                // Keep original active state logic
+                navLinksContainer.querySelectorAll('a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Toggle off menu
+                menuToggle.classList.remove('active');
+                navLinksContainer.classList.remove('active');
+            };
+        });
+    }
 }
 
 function openModal() {
