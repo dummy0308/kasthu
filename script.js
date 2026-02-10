@@ -9,7 +9,7 @@ const MY_NAME = "Antigravity"; // Your name
 const BIRTHDAY_DATE = "2026-03-03"; // Format: YYYY-MM-DD
 const PASSCODE = "0108"; // Secret page code
 const FINAL_VIDEO_URL = "#"; // Final message link
-const DEBUG_MODE = false; // SET TO TRUE TO UNLOCK EVERYTHING FOR TESTING
+const DEBUG_MODE = true; // SET TO TRUE TO UNLOCK EVERYTHING FOR TESTING
 
 console.log("--- Birthday Site Script Initializing ---");
 console.log("GIRL_NAME:", GIRL_NAME);
@@ -80,6 +80,66 @@ const REASONS = [
     "Simply because you are YOU, and I love every bit of it."
 ];
 
+const PRAISES = [
+    "You have the most beautiful smile I've ever seen. ❤️",
+    "Your kindness is your greatest strength. 🌟",
+    "I love the way you laugh at my silly jokes. 😂",
+    "You are the strongest person I know. 💪",
+    "Everything is better when I'm with you. 🌸",
+    "Your eyes hold a universe of love. ✨",
+    "You are my favorite thought in the morning. ☕",
+    "I'm so proud of everything you achieve. 🏆",
+    "You make ordinary moments feel extraordinary. 🌈",
+    "The world is brighter just because you're in it. ☀️",
+    "You have a heart of gold. 💛",
+    "I love how passionate you are about your dreams. 🚀",
+    "You are my safe haven. 🏠",
+    "Your intelligence always amazes me. 🧠",
+    "You are the most caring partner anyone could ask for. 🫂",
+    "I love your sense of style! 👗",
+    "You are my missing piece. 🧩",
+    "I love you more than words can express. ❤️"
+];
+
+const MEMORIES = [
+    "Our first coffee date where we talked for hours.",
+    "That rainy evening when we shared an umbrella.",
+    "The time we got lost but turned it into an adventure.",
+    "Watching our first sunset together at the beach.",
+    "The way you surprised me on my last birthday.",
+    "Our silly late-night video calls that lasted until dawn.",
+    "Finding that hidden cafe with the best hot chocolate.",
+    "The first time we held hands in the park.",
+    "Cooking together and making a huge mess in the kitchen.",
+    "Your first 'I love you' (I'll never forget that moment)."
+];
+
+const PROMISES = [
+    "I promise to always be your biggest fan and supporter.",
+    "I promise to hold your hand through every storm.",
+    "I promise to always listen, even when we disagree.",
+    "I promise to make you laugh every single day.",
+    "I promise to never stop choosing you, every morning.",
+    "I promise to create a lifetime of beautiful memories with you.",
+    "I promise to always be your safe place to land.",
+    "I promise to keep our love adventurous and fresh.",
+    "I promise to love you more today than I did yesterday.",
+    "I promise to be yours, forever and always."
+];
+
+const COMPLIMENTS = [
+    "You are remarkably intelligent and quick-witted.",
+    "Your sense of style is absolutely impeccable.",
+    "You have a way of making everyone feel special.",
+    "You are incredibly resilient and strong.",
+    "Your creativity never ceases to amaze me.",
+    "You are the most beautiful person I know, inside and out.",
+    "You have such a kind and generous soul.",
+    "Your determination is so inspiring to me.",
+    "You are an amazing listener and a true friend.",
+    "You make the world a better place just by being in it."
+];
+
 const LETTERS = [
     { type: "sad", title: "sad", message: "My love, I'm sorry you're feeling down. Take a deep breath. You are so much stronger than you feel right now. I'm always here with a shoulder to lean on. ❤️" },
     { type: "miss", title: "miss me", message: "I'm probably missing you even more right now. Close your eyes and remember our last hug. I'll be back in your arms before you know it." },
@@ -89,8 +149,9 @@ const LETTERS = [
 
 const SURPRISES = [
     {
-        day: 30, type: "text", title: "The Beginning", message: `Innum 30 naal irukku... This countdown is just a small way to say how much you mean to me. Get ready for a surprise every 5 days!
-        Innum 30 naal irukku, Aanaal indha naal enakku special… Un sirippu nenachale Indha naalum festival pola feel aagudhu.
+        day: 30, type: "envelope", title: "A Special Letter", message: `Innum 30 naal irukku... This countdown is just a small way to say how much you mean to me. Get ready for a surprise every 5 days!
+
+Innum 30 naal irukku, Aanaal indha naal enakku special… Un sirippu nenachale Indha naalum festival pola feel aagudhu.
 
 Birthday oru naal thaan varum, Aanaal nee irukkura ella naalum En life-la celebration thaan.
 
@@ -99,10 +160,44 @@ Cake illa, candle illa, Aanaal un ninaivu mattum podhum Indha 30 naalum happy-aa
 Un birthday vara varaikkum illa… Un sirippu irukkura varaikkum En manasula sandhosham mudiyadhu.
 
 Advance-aa solren illa… Late-aa kooda illa… Simply heart-la irundhu solren — Nee irukkura naal ellame Enakku best days thaan 💖` },
-    { day: 25, type: "image", title: "Throwback", message: "Remember these? Truly some of my favorites.", images: ["us/imp1.jpg", "us/imp2.jpg", "us/imp3.jpg"] },
-    { day: 20, type: "quiz", title: "Fun Fact", message: "A silly question for you...", quiz: { question: "When will our fights be over?", options: ["Never", "Tomorrow", "After Marriage"], correct: 0 } },
-    { day: 15, type: "audio", title: "Voice Note", message: "A little message from me to you.", placeholder: "voice.m4a" },
-    { day: 10, type: "coupon", title: "Choose Your Treat", message: "Redeem this for one of the following:", options: ["Movie Date 🎬", "Relaxing Massage 💆‍♀️", "Weekend Trip 🚗", "Favorite Food 🍕"] },
+    { day: 25, type: "polaroid", title: "Our Memory Wall", message: "intha phpotos ellam gapagam iruka ellam namaloda 1st memories create pana places and memories ipa nechalum feels heaven no? intha nimidam than innum thodaruma momment? i hope this will forever us only and wish a advance happy birthday my dear chellameee", images: ["us/imp1.jpg", "us/imp2.jpg", "us/imp3.jpg"] },
+    {
+        day: 20,
+        type: "quiz-game",
+        title: "Our Love Journey",
+        message: "Let's see how much you remember about us... 15 levels of memories!",
+        quizSteps: [
+            { question: "When will our fights be over?", options: ["Never", "Tomorrow", "After Marriage"], correct: 0 },
+            { question: "Who started the first fight? (Be honest! 😂)", options: ["Me", "You", "Both of us"], correct: 2 },
+            { question: "What's the one thing I love most about you?", options: ["Your Smile", "Your Heart", "Everything"], correct: 2 },
+            { question: "Who is more stubborn among us?", options: ["Definitely Me", "Definitely You", "It's a Tie!"], correct: 0 },
+            { question: "Who said 'I love you' first?", options: ["I did", "You did", "We said it together"], correct: 1 },
+            { question: "What's my favorite color on you?", options: ["Blue", "Black", "White"], correct: 0 },
+            { question: "Where was our first official date?", options: ["Beach", "Cafe", "Park"], correct: 2 },
+            { question: "Who is better at keeping secrets?", options: ["Me", "You", "None of us 😂"], correct: 2 },
+            { question: "What's my favorite midnight snack?", options: ["Pizza", "Chocolate", "Maggi"], correct: 0 },
+            { question: "Who is more likely to cry during a movie?", options: ["Me", "You", "Both of us"], correct: 0 },
+            { question: "What's my 'signature' song on you?", options: ["Munbe vaa", "Megham Karukatha", "Oorum blood"], correct: 2 },
+            { question: "Who is the better driver?", options: ["Me (Obviously)", "You", "We both did"], correct: 2 },
+            { question: "What's the one thing that always makes me smile?", options: ["Your Voice", "Your litte surprises", "Just You"], correct: 1 },
+            { question: "If we were in a movie, who would be the villain?", options: ["Me", "You", "Mamiyar and frnds"], correct: 2 },
+            { question: "Do I love you more than Biryani?", options: ["Yes", "No", "Maybe..."], correct: 1 }
+        ]
+    },
+    {
+        day: 15,
+        type: "jar",
+        title: "The Love Jar",
+        message: "Reach in and pick a heart note...",
+        notes: REASONS,
+        voiceNotes: {
+            'REASONS': 'voice1.m4a',
+            'MEMORIES': 'voice2.m4a',
+            'PROMISES': 'voice3.m4a',
+            'COMPLIMENTS': 'voice4.m4a'
+        }
+    },
+    { day: 10, type: "wheel-3d", title: "Wheel of Love 💖", message: "Spin the drum to see what I love about you most today...", praises: PRAISES },
     { day: 5, type: "link", title: "Mood Song", message: "Listen to this...", link: "https://www.youtube.com/watch?v=juHpoMK3AuQ" },
     { day: 4, type: "text", title: "Why I Love You", message: "I love you because you make ordinary days feel extraordinary. Your smile is my daily motivation." },
     { day: 3, type: "clue", title: "A Little Hint", message: "Your birthday gift is something you can hold, something you can keep, and something that reminds you of us." },
@@ -113,6 +208,7 @@ Advance-aa solren illa… Late-aa kooda illa… Simply heart-la irundhu solren �
 // --- LOGIC ---
 
 let openedSurprises = JSON.parse(localStorage.getItem('openedSurprises')) || [];
+let currentJarCategory = 'REASONS';
 
 function init() {
     console.log("Initializing UI components...");
@@ -148,7 +244,6 @@ function startTimers() {
         const diff = target - now;
         const daysLeft = Math.ceil(diff / 86400000);
 
-        // ... existing timer logic ...
         if (diff > 0) {
             const d = Math.floor(diff / 86400000);
             const h = Math.floor((diff % 86400000) / 3600000);
@@ -244,13 +339,11 @@ function openSurprise(data) {
         content += `<video controls style="width:100%; border-radius:10px; margin-top:10px;"><source src="${data.placeholder}" type="video/mp4">Your browser does not support video.</video>`;
     } else if (data.type === 'link') {
         let url = data.link;
-        // Simple YouTube Embed
         if (url.includes('youtube.com') || url.includes('youtu.be')) {
             let videoId = url.split('v=')[1];
             if (!videoId && url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1];
             const ampersandPosition = videoId ? videoId.indexOf('&') : -1;
             if (ampersandPosition !== -1) videoId = videoId.substring(0, ampersandPosition);
-
             if (videoId) {
                 content += `<iframe width="100%" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
             } else {
@@ -265,12 +358,117 @@ function openSurprise(data) {
             content += `<div class="coupon-ticket">${opt}</div>`;
         });
         content += `</div>`;
-    } else if (data.type === 'quiz') {
-        content += `<div class="quiz-options"><p><strong>${data.quiz.question}</strong></p>`;
-        data.quiz.options.forEach((opt, i) => {
-            content += `<button class="quiz-btn" onclick="checkQuiz(this, ${i === data.quiz.correct})">${opt}</button>`;
-        });
-        content += `</div>`;
+    } else if (data.type === 'envelope') {
+        content += `
+            <div class="envelope-wrapper" onclick="this.classList.toggle('open'); if(this.classList.contains('open')) startTypewriter('env-text', \`${data.message}\`)">
+                <div class="envelope-top"></div>
+                <div class="envelope-letter">
+                    <div id="env-text" class="typewriter-text">Click the heart to open...</div>
+                </div>
+                <div class="envelope-front"></div>
+                <div class="heart-seal">❤️</div>
+            </div>`;
+    } else if (data.type === 'polaroid') {
+        content += `
+            <div class="polaroid-desk">
+                ${data.images.map(img => {
+            const rot = (Math.random() * 20 - 10).toFixed(1);
+            const tx = (Math.random() * 20 - 10).toFixed(1);
+            const ty = (Math.random() * 20 - 10).toFixed(1);
+            return `
+                        <div class="polaroid-item" 
+                             style="transform: rotate(${rot}deg) translate(${tx}px, ${ty}px)"
+                             onclick="openLightbox('${img}', '${data.title}')">
+                            <img src="${img}">
+                        </div>`;
+        }).join('')}
+            </div>`;
+    } else if (data.type === 'jar') {
+        content += `
+            <div style="text-align:center;">
+                <div class="category-filters">
+                    <button class="category-pill active" onclick="changeJarCategory('REASONS', this)">Reasons</button>
+                    <button class="category-pill" onclick="changeJarCategory('MEMORIES', this)">Memories</button>
+                    <button class="category-pill" onclick="changeJarCategory('PROMISES', this)">Promises</button>
+                    <button class="category-pill" onclick="changeJarCategory('COMPLIMENTS', this)">Compliments</button>
+                </div>
+                <div id="jar-container" class="jar-wrapper" onclick="pickJarNote()">
+                    <svg class="jar-svg" viewBox="0 0 100 130">
+                        <path d="M30 10 L70 10 L70 25 Q70 30 75 35 Q95 50 95 80 Q95 120 50 120 Q5 120 5 80 Q5 50 25 35 Q30 30 30 25 Z" fill="none" stroke="#ff758c" stroke-width="2"/>
+                        <rect x="25" y="5" width="50" height="8" rx="2" fill="#ff758c"/>
+                    </svg>
+                    <div id="jar-hearts-container"></div>
+                </div>
+                <audio id="jar-audio"><source src="${data.voiceNotes['REASONS']}" type="audio/mpeg"></audio>
+                <div id="jar-note-popup" class="quiz-feedback"></div>
+            </div>`;
+        currentJarCategory = 'REASONS'; // Reset to default when opening
+        setTimeout(() => spawnJarHearts(), 100);
+    } else if (data.type === 'scratch') {
+        content += `
+            <div style="text-align:center;">
+                <p>Use your mouse or finger to scratch and reveal!</p>
+                <div class="scratch-card-container">
+                    <div class="scratch-content">
+                        <h3 style="color:var(--primary); margin-bottom:1rem;">Your Coupons!</h3>
+                        <div class="coupon-container">
+                            ${data.coupons.map(c => `<div class="coupon-ticket">${c}</div>`).join('')}
+                        </div>
+                    </div>
+                    <canvas id="scratch-canvas" width="300" height="400"></canvas>
+                </div>
+            </div>`;
+        setTimeout(() => initScratchCard(), 100);
+    } else if (data.type === 'wheel-3d') {
+        content += `
+            <div style="text-align:center;">
+                <div class="wheel-3d-container">
+                    <button class="wheel-nav-btn prev" onclick="moveWheel(-1)" aria-label="Previous">▲</button>
+                    <div class="wheel-3d-wrapper" id="wheel-3d-wrapper">
+                        <div class="wheel-3d-overlay"></div>
+                        <div class="wheel-3d-selector"></div>
+                        <div id="wheel-3d-drum" class="wheel-3d-drum"></div>
+                    </div>
+                    <button class="wheel-nav-btn next" onclick="moveWheel(1)" aria-label="Next">▼</button>
+                </div>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:1rem;">Swipe, drag, or use arrows to explore... ✨</p>
+                <div id="wheel-3d-result" class="wheel-result"></div>
+            </div>`;
+        setTimeout(() => initWheel3D(), 100);
+    } else if (data.type === 'quiz-game') {
+        content += `
+            <div id="quiz-game-container">
+                <div id="quiz-step-area">
+                    <p class="question-counter">Question 1 of ${data.quizSteps.length}</p>
+                    <p class="quiz-question">${data.quizSteps[0].question}</p>
+                    <div class="quiz-options">
+                        ${data.quizSteps[0].options.map((opt, i) => `
+                            <button class="quiz-btn" onclick="checkQuizStep(this, ${i === data.quizSteps[0].correct}, 0)">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+                <div id="quiz-feedback" class="quiz-feedback"></div>
+                <div id="game-area" class="reveal-content">
+                    <h3 style="color:var(--secondary); margin-bottom:1rem;">Phase 1 Complete! 🌟</h3>
+                    <p>Now, show me how much you love me! Tap the heart to fill the meter.</p>
+                    <div class="love-meter-container">
+                        <div class="meter-track">
+                            <div id="love-meter-fill" class="meter-fill">
+                                <span class="meter-heart">❤️</span>
+                            </div>
+                        </div>
+                        <div id="meter-percentage" style="font-weight:bold; color:var(--primary); margin-bottom:1rem;">0%</div>
+                        <div class="tap-btn" onclick="handleMeterTap()">❤️</div>
+                    </div>
+                </div>
+                <div id="final-reveal" class="reveal-content">
+                    <h3 style="color:var(--primary); margin-bottom:1rem;">You Filled My Heart! 💖</h3>
+                    <p style="font-size:1.1rem; line-height:1.6;">Namma sandai pottaalum, misunderstandings vandhalum, un mela ulla kaadhal mattum koraiyave koraiyadhu. You are the best thing that ever happened to me. Happy early Birthday, my everything! 🌸</p>
+                    <img src="us/imp2.jpg" style="width:100%; border-radius:15px; margin-top:1.5rem; box-shadow:var(--shadow-lg);">
+                </div>
+            </div>`;
     }
 
     body.innerHTML = content;
@@ -283,15 +481,330 @@ function openSurprise(data) {
     }
 }
 
-window.checkQuiz = (btn, isCorrect) => {
+// --- Games & Interaction Logic ---
+
+window.checkQuizStep = (btn, isCorrect, stepIndex) => {
+    const feedback = document.getElementById('quiz-feedback');
+    const stepArea = document.getElementById('quiz-step-area');
+    const currentSurprise = SURPRISES.find(s => s.day === 20);
+    const allBtns = btn.parentElement.querySelectorAll('.quiz-btn');
+
     if (isCorrect) {
         btn.classList.add('correct');
-        alert("Correct! ❤️");
+        allBtns.forEach(b => b.disabled = true);
+        feedback.textContent = "Correct! ✨";
+        feedback.style.color = "#065f46";
+        feedback.style.background = "#d1fae5";
+        feedback.classList.add('show');
+
+        setTimeout(() => {
+            feedback.classList.remove('show');
+            const nextIndex = stepIndex + 1;
+            if (nextIndex < currentSurprise.quizSteps.length) {
+                const step = currentSurprise.quizSteps[nextIndex];
+                stepArea.innerHTML = `
+                    <p class="question-counter">Question ${nextIndex + 1} of ${currentSurprise.quizSteps.length}</p>
+                    <p class="quiz-question">${step.question}</p>
+                    <div class="quiz-options">
+                        ${step.options.map((opt, i) => `
+                            <button class="quiz-btn" onclick="checkQuizStep(this, ${i === step.correct}, ${nextIndex})">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                stepArea.style.display = 'none';
+                document.getElementById('game-area').classList.add('show');
+                startConfetti();
+            }
+        }, 1000);
     } else {
         btn.classList.add('wrong');
-        alert("Try again! You can do it.");
+        feedback.textContent = "Oops! Try again... 🌸";
+        feedback.style.color = "#991b1b";
+        feedback.style.background = "#fee2e2";
+        feedback.classList.add('show');
+        setTimeout(() => { btn.classList.remove('wrong'); }, 600);
     }
 };
+
+let meterPercent = 0;
+window.handleMeterTap = () => {
+    if (meterPercent >= 100) return;
+    meterPercent += 5;
+    if (meterPercent > 100) meterPercent = 100;
+
+    const fill = document.getElementById('love-meter-fill');
+    const percText = document.getElementById('meter-percentage');
+    if (fill) fill.style.width = `${meterPercent}%`;
+    if (percText) percText.textContent = `${meterPercent}%`;
+
+    spawnFloatingHeart();
+
+    if (meterPercent === 100) {
+        setTimeout(() => {
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('final-reveal').classList.add('show');
+            startLongConfetti();
+        }, 800);
+    }
+};
+
+function spawnFloatingHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = (window.innerWidth / 2 - 20) + (Math.random() * 100 - 50) + 'px';
+    heart.style.top = (window.innerHeight / 2 - 20) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+}
+
+// --- 3D Wheel Logic (Gestural Reveal) ---
+let currentRotationX = 0;
+let isDragging = false;
+let startY = 0;
+
+window.initWheel3D = () => {
+    const wrapper = document.getElementById('wheel-3d-wrapper');
+    const drum = document.getElementById('wheel-3d-drum');
+    if (!drum || !wrapper) return;
+
+    // Reset rotation state on every open
+    currentRotationX = 0;
+    drum.style.transform = `rotateX(0deg)`;
+    drum.style.transition = 'none';
+
+    const data = SURPRISES.find(s => s.day === 10);
+    const praises = data.praises;
+    const count = praises.length;
+    const panelHeight = 90; // Increased height for better text visibility
+    const radius = Math.round((panelHeight / 2) / Math.tan(Math.PI / count)) + 10;
+
+    drum.innerHTML = '';
+    praises.forEach((text, i) => {
+        const panel = document.createElement('div');
+        panel.className = 'wheel-3d-segment';
+        const angle = (360 / count) * i;
+        panel.style.transform = `rotateX(${-angle}deg) translateZ(${radius}px)`;
+        panel.innerHTML = `<span>${text}</span>`;
+        drum.appendChild(panel);
+    });
+
+    const handleStart = (e) => {
+        isDragging = true;
+        startY = e.touches ? e.touches[0].clientY : e.clientY;
+        drum.style.transition = 'none';
+    };
+
+    const handleMove = (e) => {
+        if (!isDragging) return;
+        const y = e.touches ? e.touches[0].clientY : e.clientY;
+        const delta = (startY - y) * 1.2; // Increased sensitivity (was 0.4)
+        currentRotationX += delta;
+        startY = y;
+        drum.style.transform = `rotateX(${currentRotationX}deg)`;
+        update3DFocus();
+    };
+
+    const handleEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        drum.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        const panelAngle = 360 / praises.length;
+        currentRotationX = Math.round(currentRotationX / panelAngle) * panelAngle;
+        drum.style.transform = `rotateX(${currentRotationX}deg)`;
+        setTimeout(update3DFocus, 400);
+    };
+
+    wrapper.addEventListener('mousedown', handleStart);
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleEnd);
+    wrapper.addEventListener('touchstart', handleStart, { passive: false });
+    window.addEventListener('touchmove', handleMove, { passive: false });
+    window.addEventListener('touchend', handleEnd, { passive: false });
+
+    setTimeout(update3DFocus, 100);
+};
+
+window.moveWheel = (direction) => {
+    const drum = document.getElementById('wheel-3d-drum');
+    if (!drum) return;
+
+    const data = SURPRISES.find(s => s.day === 10);
+    const count = data.praises.length;
+    const panelAngle = 360 / count;
+
+    // Moving to next segment (direction 1) means increasing rotationX
+    // Moving to prev segment (direction -1) means decreasing rotationX
+    currentRotationX += direction * panelAngle;
+
+    drum.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    drum.style.transform = `rotateX(${currentRotationX}deg)`;
+    setTimeout(update3DFocus, 400);
+};
+
+function update3DFocus() {
+    const drum = document.getElementById('wheel-3d-drum');
+    if (!drum) return;
+    const data = SURPRISES.find(s => s.day === 10);
+    const count = data.praises.length;
+    const panelAngle = 360 / count;
+    const normalizedRot = ((currentRotationX % 360) + 360) % 360;
+    const activeIdx = Math.round(normalizedRot / panelAngle) % count;
+
+    const segments = drum.querySelectorAll('.wheel-3d-segment');
+    segments.forEach((seg, i) => {
+        if (i === activeIdx) seg.classList.add('focus');
+        else seg.classList.remove('focus');
+    });
+}
+
+window.startTypewriter = (id, text) => {
+    const el = document.getElementById(id);
+    if (!el || el.dataset.started) return;
+    el.dataset.started = 'true';
+    el.innerHTML = '';
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            el.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, 30);
+        }
+    }
+    type();
+};
+
+
+
+function changeJarCategory(category, btn) {
+    currentJarCategory = category;
+
+    // Update active pill
+    document.querySelectorAll('.category-pill').forEach(pill => pill.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update audio source
+    const jarSurprise = SURPRISES.find(s => s.day === 15);
+    const audio = document.getElementById('jar-audio');
+    if (audio && jarSurprise && jarSurprise.voiceNotes) {
+        audio.src = jarSurprise.voiceNotes[category];
+        audio.load();
+    }
+
+    // Re-spawn hearts for visual effect
+    spawnJarHearts();
+}
+
+function spawnJarHearts() {
+    const container = document.getElementById('jar-hearts-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    // Map categories to colors for variety
+    const colors = {
+        'REASONS': '#ff758c',
+        'MEMORIES': '#ff7eb3',
+        'PROMISES': '#75baff',
+        'COMPLIMENTS': '#ffb375'
+    };
+    const color = colors[currentJarCategory] || '#ff758c';
+
+    for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'jar-heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = (Math.random() * 60 + 20) + '%';
+        heart.style.bottom = (Math.random() * 40 + 10) + '%';
+        heart.style.transform = `rotate(${Math.random() * 40 - 20}deg) scale(${Math.random() * 0.5 + 0.8})`;
+        heart.style.color = color;
+        container.appendChild(heart);
+    }
+}
+
+function pickJarNote() {
+    const jar = document.getElementById('jar-container');
+    const popup = document.getElementById('jar-note-popup');
+    const audio = document.getElementById('jar-audio');
+
+    // Shaking Animation
+    jar.classList.add('shaking');
+    if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(e => console.log("Audio play blocked"));
+    }
+
+    // Flying Heart Effect
+    spawnFloatingHeart();
+
+    setTimeout(() => {
+        jar.classList.remove('shaking');
+
+        let pool = [];
+        if (currentJarCategory === 'REASONS') pool = REASONS;
+        else if (currentJarCategory === 'MEMORIES') pool = MEMORIES;
+        else if (currentJarCategory === 'PROMISES') pool = PROMISES;
+        else if (currentJarCategory === 'COMPLIMENTS') pool = COMPLIMENTS;
+
+        const note = pool[Math.floor(Math.random() * pool.length)];
+
+        popup.innerHTML = `<span style="color:var(--primary); font-weight:bold; display:block; margin-bottom:0.5rem;">${currentJarCategory}:</span> "${note}"`;
+        popup.classList.add('show');
+
+        // Hide popup after a while
+        setTimeout(() => popup.classList.remove('show'), 4000);
+    }, 500);
+}
+
+window.initScratchCard = () => {
+    const canvas = document.getElementById('scratch-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    ctx.fillStyle = '#ccc';
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = '#888';
+    ctx.font = '20px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillText('Scratch here! ✨', width / 2, height / 2);
+
+    let isDrawing = false;
+    function scratch(e) {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches[0].clientX) - rect.left;
+        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 25, 0, Math.PI * 2);
+        ctx.fill();
+        checkScratchProgress();
+    }
+    function checkScratchProgress() {
+        const imageData = ctx.getImageData(0, 0, width, height);
+        let clearPixels = 0;
+        for (let i = 3; i < imageData.data.length; i += 4) { if (imageData.data[i] === 0) clearPixels++; }
+        if (clearPixels > (imageData.data.length / 4) * 0.6) {
+            canvas.style.opacity = '0';
+            canvas.style.pointerEvents = 'none';
+            startConfetti();
+        }
+    }
+    canvas.onmousedown = canvas.ontouchstart = () => isDrawing = true;
+    canvas.onmouseup = canvas.ontouchend = () => isDrawing = false;
+    canvas.onmousemove = canvas.ontouchmove = scratch;
+};
+
+// --- Standard UI Helpers ---
+
+function startLongConfetti() {
+    startConfetti();
+    setTimeout(startConfetti, 1000);
+    setTimeout(startConfetti, 2000);
+}
 
 function renderTimeline() {
     const cont = document.getElementById('timeline-container');
@@ -317,7 +830,6 @@ function renderGallery(filter) {
     if (!grid) return;
     grid.innerHTML = '';
     const items = filter === 'all' ? GALLERY_IMAGES : GALLERY_IMAGES.filter(img => img.category === filter);
-
     items.forEach(img => {
         const div = document.createElement('div');
         div.className = 'gallery-item';
@@ -360,7 +872,6 @@ function renderLetters() {
 }
 
 function setupEventListeners() {
-    // Nav links
     const links = document.querySelectorAll('.nav-links a');
     links.forEach(l => {
         l.onclick = () => {
@@ -369,7 +880,6 @@ function setupEventListeners() {
         };
     });
 
-    // Gallery Filters
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.onclick = () => {
             document.querySelector('.filter-btn.active').classList.remove('active');
@@ -378,7 +888,6 @@ function setupEventListeners() {
         };
     });
 
-    // Shuffle Reason
     const shuffleBtn = document.getElementById('shuffle-reason');
     if (shuffleBtn) {
         shuffleBtn.onclick = () => {
@@ -389,7 +898,6 @@ function setupEventListeners() {
         };
     }
 
-    // Secret Page
     const unlockBtn = document.getElementById('unlock-secret');
     if (unlockBtn) {
         unlockBtn.onclick = () => {
@@ -399,20 +907,12 @@ function setupEventListeners() {
                 const content = document.getElementById('secret-content');
                 if (content) {
                     content.classList.remove('hidden');
-                    document.getElementById('secret-memory').textContent = `My favorite memory is just us being us — no filters, no pretense, just love.
-We’ve shared so much love together. Romba struggles, misunderstandings ellam vandhalum, athellam thaandi innum namma rendu perum orutharai oruthar choose panninom, together iruka decide panninom.
-
-Naan senja ellathukkum romba romba sorry. Unna hurt panninathuku manasara mannippu ketkuren. Please forgive me… naan romba sincerely, deeply beg pannuren.
-
-I love you so much, chellameee ❤️`;
+                    document.getElementById('secret-memory').textContent = `My favorite memory is just us being us — no filters, no pretense, just love...Naan senja ellathukkum romba romba sorry. Unna hurt panninathuku manasara mannippu ketkuren. I love you so much ❤️`;
                 }
-            } else {
-                alert("Wrong password! Hint: The year it all started.");
-            }
+            } else { alert("Wrong password! Hint: The year it all started."); }
         };
     }
 
-    // Modal Close
     const closeBtn = document.getElementById('close-modal');
     if (closeBtn) closeBtn.onclick = closeModal;
 
@@ -421,20 +921,16 @@ I love you so much, chellameee ❤️`;
         if (e.target.id === 'lightbox') closeLightbox();
     };
 
-    window.onkeydown = (e) => {
-        if (e.key === 'Escape') { closeModal(); closeLightbox(); }
-    };
+    window.onkeydown = (e) => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } };
 
-    // Lightbox Close
     const lbClose = document.getElementById('close-lightbox');
     if (lbClose) lbClose.onclick = closeLightbox;
 
-    // Final Message
     const finalBtn = document.getElementById('final-message-btn');
     if (finalBtn) {
         finalBtn.onclick = () => {
             document.getElementById('modal-title').textContent = "My Final Message";
-            document.getElementById('modal-body').innerHTML = `<div style="line-height:1.6;"><p>Happy Birthday ${GIRL_NAME}!</p><br><p>This month was just a small way to show you how much you mean to me. I love you more than words can say.</p></div>`;
+            document.getElementById('modal-body').innerHTML = `<div style="line-height:1.6;"><p>Happy Birthday ${GIRL_NAME}!</p><br><p>I love you more than words can say.</p></div>`;
             openModal();
         };
     }
@@ -443,7 +939,6 @@ I love you so much, chellameee ❤️`;
 function setupNavigation() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
-
     window.onscroll = () => {
         let current = "";
         sections.forEach(s => {
@@ -455,25 +950,15 @@ function setupNavigation() {
             if (link.getAttribute('href').includes(current)) link.classList.add('active');
         });
     };
-
-    // Mobile Menu Toggle Logic
     const menuToggle = document.getElementById('menu-toggle');
     const navLinksContainer = document.getElementById('nav-links');
-
     if (menuToggle && navLinksContainer) {
         menuToggle.onclick = () => {
             menuToggle.classList.toggle('active');
             navLinksContainer.classList.toggle('active');
         };
-
-        // Close menu when a link is clicked
         navLinksContainer.querySelectorAll('a').forEach(link => {
-            link.onclick = (e) => {
-                // Keep original active state logic
-                navLinksContainer.querySelectorAll('a').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-
-                // Toggle off menu
+            link.onclick = () => {
                 menuToggle.classList.remove('active');
                 navLinksContainer.classList.remove('active');
             };
@@ -483,17 +968,11 @@ function setupNavigation() {
 
 function openModal() {
     const m = document.getElementById('modal-backdrop');
-    if (m) {
-        m.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
+    if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
 }
 function closeModal() {
     const m = document.getElementById('modal-backdrop');
-    if (m) {
-        m.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
+    if (m) { m.classList.add('hidden'); document.body.style.overflow = 'auto'; }
 }
 function openLightbox(url, cap) {
     const lb = document.getElementById('lightbox');
@@ -508,10 +987,7 @@ function openLightbox(url, cap) {
 }
 function closeLightbox() {
     const lb = document.getElementById('lightbox');
-    if (lb) {
-        lb.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
+    if (lb) { lb.classList.add('hidden'); document.body.style.overflow = 'auto'; }
 }
 
 function startConfetti() {
@@ -551,3 +1027,93 @@ function startConfetti() {
 }
 
 window.onload = init;
+
+
+/*--------------------
+Carousel Memory Wall Logic
+--------------------*/
+(function () {
+    let progress = 50
+    let startX = 0
+    let active = 0
+    let isDown = false
+
+    const speedWheel = 0.02
+    const speedDrag = -0.1
+
+    const getZindex = (array, index) => (array.map((_, i) => (index === i) ? array.length : array.length - Math.abs(index - i)))
+
+    const $items = document.querySelectorAll('.carousel-item')
+    const $cursors = document.querySelectorAll('.cursor')
+
+    if ($items.length === 0) return;
+
+    const displayItems = (item, index, active) => {
+        const zIndex = getZindex([...$items], active)[index]
+        item.style.setProperty('--zIndex', zIndex)
+        item.style.setProperty('--active', (index - active) / $items.length)
+    }
+
+    const animate = () => {
+        progress = Math.max(0, Math.min(progress, 100))
+        active = Math.floor(progress / 100 * ($items.length - 1))
+
+        $items.forEach((item, index) => displayItems(item, index, active))
+    }
+    animate()
+
+    $items.forEach((item, i) => {
+        item.addEventListener('click', () => {
+            progress = (i / $items.length) * 100 + 10
+            animate()
+        })
+    })
+
+    const handleWheel = e => {
+        // Only handle wheel if cursor is over the gallery section
+        const gallerySection = document.getElementById('gallery');
+        if (gallerySection && gallerySection.contains(e.target)) {
+            const wheelProgress = e.deltaY * speedWheel
+            progress = progress + wheelProgress
+            animate()
+        }
+    }
+
+    const handleMouseMove = (e) => {
+        if (e.type === 'mousemove') {
+            const gallerySection = document.getElementById('gallery');
+            const isOverGallery = gallerySection && gallerySection.contains(e.target);
+
+            $cursors.forEach(($cursor) => {
+                $cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+                $cursor.style.display = isOverGallery ? 'block' : 'none'
+            })
+        }
+        if (!isDown) return
+        const x = e.clientX || (e.touches && e.touches[0].clientX) || 0
+        const mouseProgress = (x - startX) * speedDrag
+        progress = progress + mouseProgress
+        startX = x
+        animate()
+    }
+
+    const handleMouseDown = e => {
+        const gallerySection = document.getElementById('gallery');
+        if (gallerySection && gallerySection.contains(e.target)) {
+            isDown = true
+            startX = e.clientX || (e.touches && e.touches[0].clientX) || 0
+        }
+    }
+
+    const handleMouseUp = () => {
+        isDown = false
+    }
+
+    document.addEventListener('mousewheel', handleWheel)
+    document.addEventListener('mousedown', handleMouseDown)
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+    document.addEventListener('touchstart', handleMouseDown)
+    document.addEventListener('touchmove', handleMouseMove)
+    document.addEventListener('touchend', handleMouseUp)
+})();
