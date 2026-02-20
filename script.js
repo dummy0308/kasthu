@@ -9,12 +9,18 @@ const MY_NAME = "Antigravity"; // Your name
 const BIRTHDAY_DATE = "2026-03-03"; // Format: YYYY-MM-DD
 const PASSCODE = "0108"; // Secret page code
 const FINAL_VIDEO_URL = "#"; // Final message link
-const DEBUG_MODE = false; // SET TO TRUE TO UNLOCK EVERYTHING FOR TESTING
+const DEBUG_MODE = true; // SET TO TRUE TO UNLOCK EVERYTHING FOR TESTING
 
 console.log("--- Birthday Site Script Initializing ---");
 console.log("GIRL_NAME:", GIRL_NAME);
 console.log("BIRTHDAY_DATE:", BIRTHDAY_DATE);
 console.log("DEBUG_MODE:", DEBUG_MODE);
+
+let currentMegaStage = 0;
+let megaSurpriseData = null;
+let heartCatchScore = 0;
+let heartCatchTimer = null;
+let megaAudio = null;
 
 // --- DATA ---
 
@@ -197,12 +203,127 @@ Advance-aa solren illa… Late-aa kooda illa… Simply heart-la irundhu solren �
             'COMPLIMENTS': 'voice4.m4a'
         }
     },
-    { day: 10, type: "wheel-3d", title: "Wheel of Love 💖", message: "Spin the drum to see what I love about you most today...", praises: PRAISES },
-    { day: 5, type: "link", title: "Mood Song", message: "Listen to this...", link: "https://www.youtube.com/watch?v=juHpoMK3AuQ" },
-    { day: 4, type: "text", title: "Why I Love You", message: "I love you because you make ordinary days feel extraordinary. Your smile is my daily motivation." },
-    { day: 3, type: "clue", title: "A Little Hint", message: "Your birthday gift is something you can hold, something you can keep, and something that reminds you of us." },
-    { day: 2, type: "image", title: "Favorite Memory", message: "I smile every time I look at this.", placeholder: "us/imp1.jpg" }, // Defaulting to imp1, user can change later
-    { day: 1, type: "video", title: "Happy Birthday Eve!", message: "Almost there! One last wish before the big day.", placeholder: "video.mp4" } // Placeholder for now
+    {
+        day: 10,
+        type: "mega-day-10",
+        title: "Day 10: Mega Birthday Surprise! 🎊",
+        message: "This isn't just one surprise... it's a whole journey! Are you ready?",
+        stages: [
+            {
+                id: "welcome",
+                title: "Welcome! ❤️",
+                content: "Let's start your Day 10 journey with some music and love."
+            },
+            {
+                id: "wheel",
+                title: "Wheel of Love 💖",
+                content: "Spin the drum to see what I love about you most today...",
+                praises: PRAISES
+            },
+            {
+                id: "letter",
+                title: "A Secret Letter ✉️",
+                content: "I have something I've been wanting to tell you...",
+                letter: "My dearest Kasthu,\n\nAs we get closer to your big day, I wanted to take a moment to tell you how much you truly mean to me. Every day with you is a gift, but milestones like this make me realize how lucky I am to have you by my side.\n\nYou make my world brighter, my laughs louder, and my heart fuller. I hope this birthday season is as magical as you are.\n\nForever yours,\nTharu ❤️"
+            },
+            {
+                id: "game",
+                title: "Catch My Love! 🎮",
+                content: "Catch as many hearts as you can in 30 seconds!",
+                gameTime: 30
+            },
+            {
+                id: "hug",
+                title: "Virtual Hug! 🫂",
+                content: "Click the button for a massive virtual hug!",
+                hugMessage: "Sending a huge, warm hug across the screen! I love you so much! ❤️❤️❤️"
+            }
+        ]
+    },
+    {
+        day: 5,
+        type: "constellation",
+        title: "The Constellation of Us ✨",
+        message: "Our love was written in the stars long before we met. Connect the stars to reveal our celestial bond...",
+        points: [
+            { x: 50, y: 85, label: "08 Jan" },    // Bottom
+            { x: 15, y: 45, label: "First Met" },  // Mid Left
+            { x: 25, y: 15, label: "Shy Days" },   // Top Left
+            { x: 50, y: 35, label: "Us" },         // Center Dip
+            { x: 75, y: 15, label: "Laughter" },   // Top Right
+            { x: 85, y: 45, label: "Forever" }      // Mid Right
+        ]
+    },
+    {
+        day: 4,
+        type: "card-cascade",
+        title: "30 Reasons I'm Lucky 💌",
+        message: "Tap each card to reveal why I'm the luckiest person alive...",
+        reasons: [
+            "Your smile lights up my entire world ☀️",
+            "You always know how to make me laugh 😂",
+            "Your hugs feel like home 🏠",
+            "You believe in me even when I don't 💪",
+            "The way you sing along to songs in the car 🎤",
+            "Your patience with my silly plans ✨",
+            "How you always smell amazing 🌸",
+            "Your determination inspires me every day 🚀",
+            "The way you hold my hand so tight ✋",
+            "You make even boring days feel special 🌈",
+            "Your cooking experiments (even the failed ones) 🍳",
+            "How protective you are of the people you love 🛡️",
+            "Your laugh — it's my favorite sound 🎵",
+            "The way you look when you're concentrating 🤓",
+            "You always put others first 💖",
+            "Your random late-night texts that make me smile 📱",
+            "How you never give up on anything 🏆",
+            "The way your eyes sparkle when you're happy ✨",
+            "Your honesty, even when it's hard to hear 💎",
+            "How you always remember the small things 🧠",
+            "Your passion for the things you love 🔥",
+            "The way you dance when nobody's watching 💃",
+            "How you make everyone feel welcome 🤗",
+            "Your strength during tough times 💪",
+            "The way you say my name ❤️",
+            "How you always find the positive side 🌟",
+            "Your creativity and imagination 🎨",
+            "The comfort of your presence 🕊️",
+            "How you've made me a better person 🌱",
+            "Simply because you are YOU — and that's everything 👑"
+        ]
+    },
+    {
+        day: 3,
+        type: "treasure-hunt",
+        title: "Treasure Hunt 🧩",
+        message: "Solve my riddles to uncover clues about your birthday surprise!",
+        riddles: [
+            { question: "Where did we share our first awkward silence together?", hint: "Think of the place we first met...", answer: "park", clueReward: "🎁 Clue 1: It's something you can hold..." },
+            { question: "What's the song I always hum when I think about you?", hint: "It's already on this website...", answer: "pathu", clueReward: "🎁 Clue 2: ...and it's wrapped with love..." },
+            { question: "What's the one word I'd use to describe you?", hint: "It starts with P...", answer: "perfect", clueReward: "🎁 Clue 3: ...and it'll make you smile for days! 🎉" }
+        ]
+    },
+    {
+        day: 2,
+        type: "photo-story",
+        title: "Our Story 📸",
+        message: "Swipe through our journey together... every moment with you is a treasure.",
+        photos: [
+            { src: "us/imp1.jpg", date: "The Beginning", caption: "Where it all started. I never imagined this simple moment would change my life forever." },
+            { src: "us/imp2.jpg", date: "Growing Together", caption: "Every day with you taught me something new about love." },
+            { src: "us/imp3.jpg", date: "Adventures", caption: "The world looks so much better when I'm exploring it with you." },
+            { src: "Lapkas/5J3A4685.JPG", date: "That Smile", caption: "This is the exact moment I knew — you are my forever." },
+            { src: "Lapkas/5J3A4788.JPG", date: "Us", caption: "No filter needed. Just pure, real, beautiful us. ❤️" }
+        ]
+    },
+    {
+        day: 1,
+        type: "grand-finale",
+        title: "The Grand Finale 🎬",
+        message: "This is it... the final surprise before your big day!",
+        videoSrc: "video.mp4",
+        finalMessage: "Happy Birthday, Kasthu! 🎂🎉\nYou are the most incredible person I know.\nEvery moment with you is a gift.\nHere's to another year of love, laughter, and us.\nI love you more than words can say. ❤️"
+    }
 ];
 
 // --- LOGIC ---
@@ -469,6 +590,137 @@ function openSurprise(data) {
                     <img src="us/imp2.jpg" style="width:100%; border-radius:15px; margin-top:1.5rem; box-shadow:var(--shadow-lg);">
                 </div>
             </div>`;
+    } else if (data.type === 'mega-day-10') {
+        content += `
+            <div id="mega-surprise-wrapper" class="mega-surprise-container">
+                <div class="mega-progress-bar" id="mega-progress"></div>
+                <div id="mega-stage-content"></div>
+                <div class="mega-nav-btns">
+                    <button id="mega-prev-btn" class="action-btn secondary" style="display:none;" onclick="prevMegaStage()">Back</button>
+                    <button id="mega-next-btn" class="action-btn" onclick="nextMegaStage()">Continue</button>
+                </div>
+            </div>`;
+        setTimeout(() => initMegaDay10(data), 100);
+    } else if (data.type === 'music-player') {
+        content += `
+            <div class="music-player-wrapper">
+                <div class="music-now-playing">
+                    <div class="music-disc" id="music-disc">🎵</div>
+                    <div class="music-info">
+                        <div class="music-track-title" id="music-track-title">${data.tracks[0].title}</div>
+                        <div class="music-track-artist" id="music-track-artist">${data.tracks[0].artist}</div>
+                    </div>
+                </div>
+                <div class="music-note" id="music-note">${data.tracks[0].note}</div>
+                <div class="music-controls">
+                    <button class="music-ctrl-btn" onclick="prevTrack()">⏮️</button>
+                    <button class="music-ctrl-btn play-btn" id="music-play-btn" onclick="toggleMusicPlay()">▶️</button>
+                    <button class="music-ctrl-btn" onclick="nextTrack()">⏭️</button>
+                </div>
+                <div class="music-progress-bar">
+                    <div class="music-progress-fill" id="music-progress-fill"></div>
+                </div>
+                <div class="music-tracklist">
+                    ${data.tracks.map((t, i) => `
+                        <div class="music-track-item ${i === 0 ? 'active' : ''}" onclick="selectTrack(${i})" id="track-${i}">
+                            <span class="track-num">${i + 1}</span>
+                            <span class="track-name">${t.title}</span>
+                            <span class="track-artist-small">${t.artist}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <audio id="music-audio" src="${data.tracks[0].src}"></audio>
+            </div>`;
+        setTimeout(() => initMusicPlayer(data), 100);
+    } else if (data.type === 'card-cascade') {
+        content += `
+            <div class="cascade-grid" id="cascade-grid">
+                ${data.reasons.map((r, i) => `
+                    <div class="cascade-card" onclick="flipCard(this)" style="animation-delay: ${i * 0.05}s">
+                        <div class="cascade-card-inner">
+                            <div class="cascade-card-front">${i + 1}</div>
+                            <div class="cascade-card-back">${r}</div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="cascade-counter"><span id="cards-flipped">0</span> / ${data.reasons.length} revealed</div>`;
+    } else if (data.type === 'treasure-hunt') {
+        content += `
+            <div class="treasure-wrapper" id="treasure-wrapper">
+                <div class="treasure-riddle" id="treasure-riddle">
+                    <div class="riddle-number">Riddle 1 of ${data.riddles.length}</div>
+                    <p class="riddle-question">${data.riddles[0].question}</p>
+                    <p class="riddle-hint">💡 Hint: ${data.riddles[0].hint}</p>
+                    <div class="riddle-input-group">
+                        <input type="text" id="riddle-answer" class="riddle-input" placeholder="Type your answer..." onkeydown="if(event.key==='Enter')checkTreasureAnswer()">
+                        <button class="action-btn" onclick="checkTreasureAnswer()">Submit</button>
+                    </div>
+                    <div id="riddle-feedback" class="riddle-feedback"></div>
+                </div>
+                <div class="treasure-clues" id="treasure-clues">
+                    ${data.riddles.map((_, i) => `<div class="clue-slot" id="clue-slot-${i}">🔒 Clue ${i + 1}</div>`).join('')}
+                </div>
+            </div>`;
+        window._treasureData = data;
+        window._treasureIdx = 0;
+    } else if (data.type === 'photo-story') {
+        content += `
+            <div class="story-container" id="story-container">
+                <div class="story-track" id="story-track">
+                    ${data.photos.map((p, i) => `
+                        <div class="story-slide ${i === 0 ? 'active' : ''}">
+                            <img src="${p.src}" class="story-img" alt="${p.caption}">
+                            <div class="story-overlay">
+                                <div class="story-date">${p.date}</div>
+                                <div class="story-caption">${p.caption}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="story-nav">
+                    <button class="story-nav-btn" onclick="storyNav(-1)">◀</button>
+                    <div class="story-dots" id="story-dots">
+                        ${data.photos.map((_, i) => `<div class="story-dot ${i === 0 ? 'active' : ''}" onclick="storyGo(${i})"></div>`).join('')}
+                    </div>
+                    <button class="story-nav-btn" onclick="storyNav(1)">▶</button>
+                </div>
+            </div>`;
+        window._storyIdx = 0;
+        window._storyTotal = data.photos.length;
+    } else if (data.type === 'constellation') {
+        content += `
+            <div class="constellation-wrapper" id="constellation-wrapper">
+                <div class="star-sky" id="star-sky">
+                    <svg class="constellation-svg" id="constellation-svg" viewBox="0 0 100 100"></svg>
+                </div>
+                <div id="constellation-hint" class="constellation-hint">Tap the glowing stars in order...</div>
+                <div id="constellation-reveal" class="nebula-reveal" style="display:none;">
+                    <div class="nebula-message">
+                        <h3>Our Bond is Eternal</h3>
+                        <p>Like the stars above, my love for you shines brightest in the dark. You are my universe, Kasthu. ❤️</p>
+                    </div>
+                </div>
+            </div>`;
+        setTimeout(() => initConstellation(data), 100);
+    } else if (data.type === 'grand-finale') {
+        content += `
+            <div class="finale-wrapper" id="finale-wrapper">
+                <div class="finale-video-section" id="finale-video-section">
+                    <video controls class="finale-video" id="finale-video">
+                        <source src="${data.videoSrc}" type="video/mp4">
+                        Your browser does not support video.
+                    </video>
+                    <button class="action-btn finale-continue-btn" onclick="startFinaleCountdown()">I'm Ready for the Finale! 🎉</button>
+                </div>
+                <div class="finale-countdown" id="finale-countdown" style="display:none;">
+                    <div class="countdown-number" id="countdown-number">3</div>
+                </div>
+                <div class="finale-reveal" id="finale-reveal" style="display:none;">
+                    <div class="finale-text">${data.finalMessage.replace(/\n/g, '<br>')}</div>
+                    <div class="finale-emoji-rain" id="finale-emoji-rain"></div>
+                </div>
+            </div>`;
     }
 
     body.innerHTML = content;
@@ -577,7 +829,14 @@ window.initWheel3D = () => {
     drum.style.transition = 'none';
 
     const data = SURPRISES.find(s => s.day === 10);
-    const praises = data.praises;
+    let praises = data.praises;
+    if (!praises && data.stages) {
+        const wheelStage = data.stages.find(st => st.id === 'wheel');
+        if (wheelStage) praises = wheelStage.praises;
+    }
+
+    if (!praises) return;
+
     const count = praises.length;
     const panelHeight = 90; // Increased height for better text visibility
     const radius = Math.round((panelHeight / 2) / Math.tan(Math.PI / count)) + 10;
@@ -633,7 +892,13 @@ window.moveWheel = (direction) => {
     if (!drum) return;
 
     const data = SURPRISES.find(s => s.day === 10);
-    const count = data.praises.length;
+    let praises = data.praises;
+    if (!praises && data.stages) {
+        const wheelStage = data.stages.find(st => st.id === 'wheel');
+        if (wheelStage) praises = wheelStage.praises;
+    }
+    if (!praises) return;
+    const count = praises.length;
     const panelAngle = 360 / count;
 
     // Moving to next segment (direction 1) means increasing rotationX
@@ -649,7 +914,13 @@ function update3DFocus() {
     const drum = document.getElementById('wheel-3d-drum');
     if (!drum) return;
     const data = SURPRISES.find(s => s.day === 10);
-    const count = data.praises.length;
+    let praises = data.praises;
+    if (!praises && data.stages) {
+        const wheelStage = data.stages.find(st => st.id === 'wheel');
+        if (wheelStage) praises = wheelStage.praises;
+    }
+    if (!praises) return;
+    const count = praises.length;
     const panelAngle = 360 / count;
     const normalizedRot = ((currentRotationX % 360) + 360) % 360;
     const activeIdx = Math.round(normalizedRot / panelAngle) % count;
@@ -973,6 +1244,23 @@ function openModal() {
 function closeModal() {
     const m = document.getElementById('modal-backdrop');
     if (m) { m.classList.add('hidden'); document.body.style.overflow = 'auto'; }
+
+    const modal = document.getElementById('surprise-modal'); // Assuming 'surprise-modal' is the ID for the mega surprise modal
+    if (modal) modal.style.display = 'none';
+
+    // Stop mega surprise music if playing
+    if (megaAudio) {
+        megaAudio.pause();
+        megaAudio = null;
+    }
+
+    // Stop music player audio if playing
+    const musicAudio = document.getElementById('music-audio');
+    if (musicAudio) {
+        musicAudio.pause();
+    }
+
+    // Stop any quiz/game timers
 }
 function openLightbox(url, cap) {
     const lb = document.getElementById('lightbox');
@@ -1117,3 +1405,552 @@ Carousel Memory Wall Logic
     document.addEventListener('touchmove', handleMouseMove)
     document.addEventListener('touchend', handleMouseUp)
 })();
+
+// --- Mega Day 10 Surprise Logic ---
+
+window.initMegaDay10 = (data) => {
+    megaSurpriseData = data;
+    currentMegaStage = 0;
+    renderMegaProgress();
+    renderMegaStage();
+};
+
+function renderMegaProgress() {
+    const progress = document.getElementById('mega-progress');
+    if (!progress) return;
+    progress.innerHTML = megaSurpriseData.stages.map((_, i) => `
+        <div class="progress-dot ${i <= currentMegaStage ? 'active' : ''}"></div>
+    `).join('');
+}
+
+window.nextMegaStage = () => {
+    if (currentMegaStage < megaSurpriseData.stages.length - 1) {
+        currentMegaStage++;
+        renderMegaProgress();
+        renderMegaStage();
+    } else {
+        closeModal();
+    }
+};
+
+window.prevMegaStage = () => {
+    if (currentMegaStage > 0) {
+        currentMegaStage--;
+        renderMegaProgress();
+        renderMegaStage();
+    }
+};
+
+function renderMegaStage() {
+    const contentArea = document.getElementById('mega-stage-content');
+    const prevBtn = document.getElementById('mega-prev-btn');
+    const nextBtn = document.getElementById('mega-next-btn');
+    const stage = megaSurpriseData.stages[currentMegaStage];
+
+    if (!contentArea) return;
+
+    // Navigation buttons
+    if (prevBtn) prevBtn.style.display = currentMegaStage === 0 ? 'none' : 'block';
+    if (nextBtn) nextBtn.textContent = currentMegaStage === megaSurpriseData.stages.length - 1 ? 'Finish 💖' : 'Continue';
+
+    let html = `
+        <div class="mega-stage active">
+            <h2 style="color:var(--primary); margin-bottom:1rem;">${stage.title}</h2>
+            <p style="margin-bottom:1.5rem;">${stage.content}</p>
+    `;
+
+    if (stage.id === 'welcome') {
+        html += `<div style="font-size:4rem; margin:2rem 0; animation: bounce 2s infinite;">🎵❤️</div>`;
+
+        // Start background music
+        if (!megaAudio) {
+            megaAudio = new Audio('Pathu_Naatkal.mp3');
+            megaAudio.loop = true;
+            megaAudio.play().catch(err => console.log("Audio play blocked:", err));
+        }
+    } else if (stage.id === 'wheel') {
+        html += `
+            <div class="wheel-3d-container">
+                <button class="wheel-nav-btn prev" onclick="moveWheel(-1)">▲</button>
+                <div class="wheel-3d-wrapper" id="wheel-3d-wrapper">
+                    <div class="wheel-3d-overlay"></div>
+                    <div class="wheel-3d-selector"></div>
+                    <div id="wheel-3d-drum" class="wheel-3d-drum"></div>
+                </div>
+                <button class="wheel-nav-btn next" onclick="moveWheel(1)">▼</button>
+            </div>
+            <div id="wheel-3d-result" class="wheel-result"></div>
+        `;
+        setTimeout(() => initWheel3D(), 100);
+    } else if (stage.id === 'letter') {
+        html += `<div id="mega-letter-text" class="letter-text"></div>`;
+        setTimeout(() => startTypewriter('mega-letter-text', stage.letter), 500);
+    } else if (stage.id === 'game') {
+        html += `
+            <div class="game-canvas-container" id="game-canvas">
+                <div class="game-score">Hearts Caught: <span id="heart-score">0</span></div>
+                <div id="game-start-msg" style="margin-top:5rem;">
+                    <button class="action-btn" onclick="startHeartCatchGame()">Start Game!</button>
+                </div>
+            </div>
+        `;
+    } else if (stage.id === 'hug') {
+        html += `
+            <div class="hug-button-container">
+                <div class="hug-btn" onclick="handleVirtualHug(this)">🫂</div>
+                <div id="hug-result-msg" class="hug-message">Click for a hug!</div>
+            </div>
+        `;
+    }
+
+    html += `</div>`;
+    contentArea.innerHTML = html;
+}
+
+window.startHeartCatchGame = () => {
+    const canvas = document.getElementById('game-canvas');
+    const startMsg = document.getElementById('game-start-msg');
+    if (!canvas || !startMsg) return;
+
+    startMsg.style.display = 'none';
+    heartCatchScore = 0;
+    document.getElementById('heart-score').textContent = '0';
+
+    let timeLeft = 30;
+    const timerDisplay = document.createElement('div');
+    timerDisplay.style.cssText = "position:absolute; top:10px; right:20px; font-weight:bold; color:var(--secondary);";
+    timerDisplay.id = "game-timer";
+    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    canvas.appendChild(timerDisplay);
+
+    heartCatchTimer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Time: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(heartCatchTimer);
+            endHeartCatchGame();
+        }
+        if (timeLeft % 1 === 0) spawnGameHeart();
+    }, 1000);
+
+    // Spawn initial hearts
+    for (let i = 0; i < 3; i++) spawnGameHeart();
+};
+
+function spawnGameHeart() {
+    const canvas = document.getElementById('game-canvas');
+    if (!canvas || !heartCatchTimer) return;
+
+    const heart = document.createElement('div');
+    heart.className = 'game-heart';
+    heart.innerHTML = ['❤️', '💖', '💝', '💗'][Math.floor(Math.random() * 4)];
+
+    const x = Math.random() * (canvas.offsetWidth - 40);
+    const y = Math.random() * (canvas.offsetHeight - 40);
+
+    heart.style.left = `${x}px`;
+    heart.style.top = `${y}px`;
+
+    heart.onclick = (e) => {
+        e.stopPropagation();
+        heartCatchScore++;
+        document.getElementById('heart-score').textContent = heartCatchScore;
+        heart.style.transform = 'scale(0)';
+        setTimeout(() => heart.remove(), 100);
+        spawnGameHeart(); // Spawn a new one when one is caught
+    };
+
+    canvas.appendChild(heart);
+
+    // Remove heart after 3 seconds if not caught
+    setTimeout(() => { if (heart.parentElement) heart.remove(); }, 3000);
+}
+
+function endHeartCatchGame() {
+    const canvas = document.getElementById('game-canvas');
+    if (!canvas) return;
+
+    // Remove all remaining hearts
+    canvas.querySelectorAll('.game-heart').forEach(h => h.remove());
+
+    const msg = document.createElement('div');
+    msg.style.cssText = "position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(255,255,255,0.9); z-index:20; animation:fadeIn 0.5s;";
+    msg.innerHTML = `
+        <h3 style="color:var(--primary);">Time's Up!</h3>
+        <p style="font-size:1.2rem;">You caught <strong>${heartCatchScore}</strong> hearts of my love!</p>
+        <button class="action-btn" style="margin-top:1rem;" onclick="startHeartCatchGame()">Play Again</button>
+    `;
+    canvas.appendChild(msg);
+    startConfetti();
+}
+
+window.handleVirtualHug = (btn) => {
+    const msg = document.getElementById('hug-result-msg');
+    if (msg) msg.textContent = megaSurpriseData.stages[currentMegaStage].hugMessage;
+
+    // Particle explosion
+    for (let i = 0; i < 30; i++) {
+        spawnHeartParticle();
+    }
+
+    if (window.startLongConfetti) startLongConfetti();
+    btn.style.animation = 'pulse 0.5s ease-in-out';
+    setTimeout(() => btn.style.animation = '', 500);
+};
+
+function spawnHeartParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'heart-particle';
+    particle.innerHTML = ['❤️', '💖', '💝', '💗', '🫂'][Math.floor(Math.random() * 5)];
+
+    const btn = document.querySelector('.hug-btn');
+    const rect = btn.getBoundingClientRect();
+
+    particle.style.left = (rect.left + rect.width / 2) + 'px';
+    particle.style.top = (rect.top + rect.height / 2) + 'px';
+
+    const tx = (Math.random() - 0.5) * 400;
+    const ty = (Math.random() - 0.5) * 400;
+
+    particle.style.setProperty('--tx', `${tx}px`);
+    particle.style.setProperty('--ty', `${ty}px`);
+
+    document.body.appendChild(particle);
+    setTimeout(() => particle.remove(), 1000);
+}
+
+// --- Day 5: Music Player ---
+let _musicData = null;
+let _musicIdx = 0;
+let _musicInterval = null;
+
+window.initMusicPlayer = (data) => {
+    _musicData = data;
+    _musicIdx = 0;
+    const audio = document.getElementById('music-audio');
+    if (!audio) return;
+    audio.addEventListener('ended', () => nextTrack());
+    audio.addEventListener('timeupdate', () => {
+        const fill = document.getElementById('music-progress-fill');
+        if (fill && audio.duration) {
+            fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+        }
+    });
+};
+
+window.toggleMusicPlay = () => {
+    const audio = document.getElementById('music-audio');
+    const btn = document.getElementById('music-play-btn');
+    const disc = document.getElementById('music-disc');
+    if (!audio) return;
+    if (audio.paused) {
+        audio.play().catch(e => console.log(e));
+        if (btn) btn.textContent = '⏸️';
+        if (disc) disc.classList.add('spinning');
+    } else {
+        audio.pause();
+        if (btn) btn.textContent = '▶️';
+        if (disc) disc.classList.remove('spinning');
+    }
+};
+
+window.selectTrack = (idx) => {
+    if (!_musicData) return;
+    _musicIdx = idx;
+    const audio = document.getElementById('music-audio');
+    if (!audio) return;
+    audio.src = _musicData.tracks[idx].src;
+    document.getElementById('music-track-title').textContent = _musicData.tracks[idx].title;
+    document.getElementById('music-track-artist').textContent = _musicData.tracks[idx].artist;
+    document.getElementById('music-note').textContent = _musicData.tracks[idx].note;
+    document.querySelectorAll('.music-track-item').forEach((el, i) => {
+        el.classList.toggle('active', i === idx);
+    });
+    audio.play().catch(e => console.log(e));
+    const btn = document.getElementById('music-play-btn');
+    const disc = document.getElementById('music-disc');
+    if (btn) btn.textContent = '⏸️';
+    if (disc) disc.classList.add('spinning');
+};
+
+window.nextTrack = () => {
+    if (!_musicData) return;
+    selectTrack((_musicIdx + 1) % _musicData.tracks.length);
+};
+
+window.prevTrack = () => {
+    if (!_musicData) return;
+    selectTrack((_musicIdx - 1 + _musicData.tracks.length) % _musicData.tracks.length);
+};
+
+// --- Day 4: Card Cascade ---
+let _cardsFlipped = 0;
+
+window.flipCard = (card) => {
+    if (card.classList.contains('flipped')) return;
+    card.classList.add('flipped');
+    _cardsFlipped++;
+    const counter = document.getElementById('cards-flipped');
+    if (counter) counter.textContent = _cardsFlipped;
+
+    // Confetti when all cards are flipped
+    const total = document.querySelectorAll('.cascade-card').length;
+    if (_cardsFlipped >= total && window.startConfetti) {
+        startConfetti();
+    }
+};
+
+// --- Day 3: Treasure Hunt ---
+window.checkTreasureAnswer = () => {
+    const input = document.getElementById('riddle-answer');
+    const feedback = document.getElementById('riddle-feedback');
+    if (!input || !feedback || !window._treasureData) return;
+
+    const idx = window._treasureIdx;
+    const riddle = window._treasureData.riddles[idx];
+    const userAnswer = input.value.trim().toLowerCase();
+
+    if (userAnswer.includes(riddle.answer.toLowerCase())) {
+        // Correct!
+        feedback.textContent = '✅ Correct!';
+        feedback.style.color = '#065f46';
+        feedback.style.background = '#d1fae5';
+        feedback.classList.add('show');
+
+        // Reveal clue
+        const clueSlot = document.getElementById(`clue-slot-${idx}`);
+        if (clueSlot) {
+            clueSlot.textContent = riddle.clueReward;
+            clueSlot.classList.add('revealed');
+        }
+
+        // Move to next riddle
+        window._treasureIdx++;
+        if (window._treasureIdx < window._treasureData.riddles.length) {
+            setTimeout(() => {
+                const nextRiddle = window._treasureData.riddles[window._treasureIdx];
+                const riddleArea = document.getElementById('treasure-riddle');
+                if (riddleArea) {
+                    riddleArea.innerHTML = `
+                        <div class="riddle-number">Riddle ${window._treasureIdx + 1} of ${window._treasureData.riddles.length}</div>
+                        <p class="riddle-question">${nextRiddle.question}</p>
+                        <p class="riddle-hint">💡 Hint: ${nextRiddle.hint}</p>
+                        <div class="riddle-input-group">
+                            <input type="text" id="riddle-answer" class="riddle-input" placeholder="Type your answer..." onkeydown="if(event.key==='Enter')checkTreasureAnswer()">
+                            <button class="action-btn" onclick="checkTreasureAnswer()">Submit</button>
+                        </div>
+                        <div id="riddle-feedback" class="riddle-feedback"></div>
+                    `;
+                }
+            }, 1200);
+        } else {
+            setTimeout(() => {
+                const riddleArea = document.getElementById('treasure-riddle');
+                if (riddleArea) {
+                    riddleArea.innerHTML = `
+                        <div style="font-size:3rem; margin-bottom:1rem;">🎉🎁</div>
+                        <h3 style="color:var(--primary);">All Clues Unlocked!</h3>
+                        <p style="margin-top:1rem;">You solved them all! Your birthday surprise is going to be amazing! 💖</p>
+                    `;
+                }
+                if (window.startConfetti) startConfetti();
+            }, 1200);
+        }
+    } else {
+        feedback.textContent = '❌ Not quite... try again!';
+        feedback.style.color = '#991b1b';
+        feedback.style.background = '#fee2e2';
+        feedback.classList.add('show');
+        input.value = '';
+        input.focus();
+    }
+};
+
+// --- Day 2: Photo Story ---
+window.storyNav = (dir) => {
+    const newIdx = window._storyIdx + dir;
+    if (newIdx < 0 || newIdx >= window._storyTotal) return;
+    storyGo(newIdx);
+};
+
+window.storyGo = (idx) => {
+    window._storyIdx = idx;
+    const slides = document.querySelectorAll('.story-slide');
+    const dots = document.querySelectorAll('.story-dot');
+    slides.forEach((s, i) => {
+        s.classList.toggle('active', i === idx);
+    });
+    dots.forEach((d, i) => {
+        d.classList.toggle('active', i === idx);
+    });
+};
+
+// --- Day 1: Grand Finale ---
+window.startFinaleCountdown = () => {
+    const videoSection = document.getElementById('finale-video-section');
+    const countdownSection = document.getElementById('finale-countdown');
+    const countdownNum = document.getElementById('countdown-number');
+
+    if (videoSection) videoSection.style.display = 'none';
+    if (countdownSection) countdownSection.style.display = 'flex';
+
+    let count = 3;
+    if (countdownNum) countdownNum.textContent = count;
+
+    const interval = setInterval(() => {
+        count--;
+        if (count > 0) {
+            if (countdownNum) {
+                countdownNum.textContent = count;
+                countdownNum.style.animation = 'none';
+                countdownNum.offsetHeight; // trigger reflow
+                countdownNum.style.animation = 'countdownPulse 1s ease-out';
+            }
+        } else {
+            clearInterval(interval);
+            if (countdownSection) countdownSection.style.display = 'none';
+            showFinaleReveal();
+        }
+    }, 1000);
+};
+
+function showFinaleReveal() {
+    const reveal = document.getElementById('finale-reveal');
+    if (reveal) reveal.style.display = 'flex';
+
+    // Spawn emoji rain
+    const rainContainer = document.getElementById('finale-emoji-rain');
+    if (rainContainer) {
+        const emojis = ['🎂', '🎉', '🎊', '🎁', '💖', '❤️', '🌸', '✨', '🥳', '🎈'];
+        for (let i = 0; i < 40; i++) {
+            const emoji = document.createElement('div');
+            emoji.className = 'finale-emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDelay = (Math.random() * 3) + 's';
+            emoji.style.animationDuration = (2 + Math.random() * 3) + 's';
+            rainContainer.appendChild(emoji);
+        }
+    }
+
+    if (window.startConfetti) startConfetti();
+    if (window.startLongConfetti) startLongConfetti();
+}
+
+// --- Constellation Surprise Logic ---
+
+window.initConstellation = (data) => {
+    const sky = document.getElementById('star-sky');
+    const svg = document.getElementById('constellation-svg');
+    if (!sky || !svg) return;
+
+    const points = data.points;
+    let currentIdx = 0;
+
+    // Background random stars
+    for (let i = 0; i < 50; i++) {
+        const tStar = document.createElement('div');
+        tStar.className = 'twinkle-star';
+        const size = Math.random() * 2 + 1;
+        tStar.style.width = size + 'px';
+        tStar.style.height = size + 'px';
+        tStar.style.left = Math.random() * 100 + '%';
+        tStar.style.top = Math.random() * 100 + '%';
+        tStar.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
+        tStar.style.setProperty('--o', Math.random() * 0.7 + 0.3);
+        tStar.style.animationDelay = Math.random() * 5 + 's';
+        sky.appendChild(tStar);
+    }
+
+    // Main constellation stars
+    points.forEach((pt, i) => {
+        const star = document.createElement('div');
+        star.className = 'constellation-star';
+        if (i === 0) star.classList.add('active');
+        star.style.left = pt.x + '%';
+        star.style.top = pt.y + '%';
+        star.id = `star-${i}`;
+
+        const label = document.createElement('div');
+        label.className = 'constellation-label';
+        label.textContent = pt.label;
+        label.style.left = (pt.x + 2) + '%';
+        label.style.top = (pt.y - 2) + '%';
+
+        star.onclick = () => {
+            if (i === currentIdx) {
+                star.classList.remove('active');
+                star.classList.add('connected');
+
+                // Draw line to previous point if not first
+                if (currentIdx > 0) {
+                    drawLine(points[currentIdx - 1], points[currentIdx]);
+                }
+
+                currentIdx++;
+
+                if (currentIdx < points.length) {
+                    const nextStar = document.getElementById(`star-${currentIdx}`);
+                    if (nextStar) nextStar.classList.add('active');
+                } else {
+                    // Complete the loop for heart
+                    drawLine(points[points.length - 1], points[0]);
+                    finishConstellation();
+                }
+
+                // Mini star burst
+                spawnHeartExplosion(pt.x, pt.y);
+            }
+        };
+
+        sky.appendChild(star);
+        sky.appendChild(label);
+    });
+
+    function drawLine(p1, p2) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", p1.x);
+        line.setAttribute("y1", p1.y);
+        line.setAttribute("x2", p2.x);
+        line.setAttribute("y2", p2.y);
+        svg.appendChild(line);
+    }
+
+    function finishConstellation() {
+        setTimeout(() => {
+            const hint = document.getElementById('constellation-hint');
+            const reveal = document.getElementById('constellation-reveal');
+            if (hint) hint.style.display = 'none';
+            if (reveal) reveal.style.display = 'flex';
+            if (window.startConfetti) startConfetti();
+
+            // Pulse the whole heart
+            svg.style.animation = 'pulseHeart 2s infinite alternate';
+        }, 1000);
+    }
+};
+
+function spawnHeartExplosion(x, y) {
+    const wrapper = document.getElementById('constellation-wrapper');
+    if (!wrapper) return;
+    for (let i = 0; i < 8; i++) {
+        const p = document.createElement('div');
+        p.className = 'heart-particle';
+        p.innerHTML = '✨';
+        p.style.position = 'absolute';
+        p.style.left = x + '%';
+        p.style.top = y + '%';
+        p.style.color = '#fff';
+        p.style.fontSize = '12px';
+        p.style.pointerEvents = 'none';
+
+        const tx = (Math.random() - 0.5) * 100;
+        const ty = (Math.random() - 0.5) * 100;
+        p.style.setProperty('--tx', `${tx}px`);
+        p.style.setProperty('--ty', `${ty}px`);
+
+        wrapper.appendChild(p);
+        setTimeout(() => p.remove(), 1000);
+    }
+}
+
